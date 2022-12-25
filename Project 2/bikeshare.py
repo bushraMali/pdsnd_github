@@ -35,6 +35,9 @@ def get_filters():
 
     print('Hello! Let\'s explore some US bikeshare data!')
 
+    print("Type end at any time if you would like to exit the program.\n")
+
+
     # get user input for city (chicago, new york city, washington), and check user input validity
     city = check_user_input("Would you like to see the data for chicago, new york city or washington?\n",'c')
     # get user input for month (all, january, february, ... , june), and check user input validity
@@ -55,6 +58,11 @@ def load_data(city, month, day):
     Returns:
         df - Pandas DataFrame containing city data filtered by month and day
     """
+
+    
+    print("\nThe program is loading the data for the filters of your choice.")
+    start_time = time.time()
+
     # load data file into a dataframe
     df = pd.read_csv(CITY_DATA[city])
 
@@ -80,7 +88,8 @@ def load_data(city, month, day):
     if day != 'all':
         # filter by day of week to create the new dataframe
         df = df[df['day_of_week'] == day.title()]
-
+	
+	
     return df
 
 def time_stats(df):
