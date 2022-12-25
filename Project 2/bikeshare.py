@@ -35,6 +35,9 @@ def get_filters():
 
     print('Hello! Let\'s explore some US bikeshare data!')
 
+    print("Type end at any time if you would like to exit the program.\n")
+
+
     # get user input for city (chicago, new york city, washington), and check user input validity
     city = check_user_input("Would you like to see the data for chicago, new york city or washington?\n",'c')
     # get user input for month (all, january, february, ... , june), and check user input validity
