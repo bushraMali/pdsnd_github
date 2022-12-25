@@ -1,4 +1,5 @@
 # Udacity programming for Data Science using Python Nanodegree
+This repository contains projects and practice set for Udacity Programming For Data Science Using Python Nanodegree.
 
 ### created By Bushra Alghamdi 
 20.12.22 
@@ -16,7 +17,8 @@ For the presentation component, the student had to create four slides, and each 
 
 ### Question Sets
 A set of questions have also been provided by Udacity so that we were free to consider and include them in our Project Submission. 
-[Check this out] (https://github.com/bushraMali/pdsnd_github/blob/master/Project%201/SQLproject%20Qustion)
+
+[Check this out](https://github.com/bushraMali/pdsnd_github/blob/master/Project%201/SQLproject%20Qustion)
 
 
 # Project 2
