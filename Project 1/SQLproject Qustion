@@ -1,0 +1,90 @@
+Q1 // Create a query that lists each movie, the film category it is classified in,
+and the number of times it has been rented out.
+
+
+SELECT Movie_Title , Category ,
+       COUNT (Rental_Count)
+From
+(SELECT F.title Movie_Title ,
+        C.name Category ,
+        R.rental_id Rental_Count
+FROM Film F
+JOIN Film_Category FC
+ON F.film_id = FC.film_id
+JOIN Category C
+ON FC.category_id = C.category_id
+JOIN Inventory I
+ON F.film_id = I.film_id
+JOIN Rental R
+ON I.Inventory_id = R.Inventory_id
+WHERE C.name IN ('Animation', 'Children', 'Classics', 'Comedy', 'Family', 'Music')) t1
+GROUP BY 1,2
+ORDER BY 2,1
+
+//
+
+
+Q2 // Can you provide a table with the movie titles and divide them into 4 levels
+(first_quarter, second_quarter, third_quarter, and final_quarter) based on the quartiles
+(25%, 50%, 75%) of the rental duration for movies across all categories?
+
+
+SELECT F.title , C.name , F.rental_duration,
+       NTILE  (4) over (PARTITION By F.rental_duration ) AS Standerd_Quartile
+       FROM Film F
+JOIN Film_Category FC
+ON F.film_id = FC.film_id
+JOIN Category C
+ON FC.category_id = C.category_id
+WHERE C.name IN ('Animation', 'Children', 'Family', 'Comedy', 'Classics', 'Music')
+ORDER BY 3;
+
+
+//
+
+
+Q3 // provide a table with the family-friendly film category,
+each of the quartiles, and the corresponding count of movies within each
+combination of film category for each corresponding rental duration category.
+
+
+
+
+SELECT t1.name , t1.Standerd_Quartile ,
+       COUNT (t1.Standerd_Quartile)
+FROM
+( SELECT F.title , C.name , F.rental_duration,
+       NTILE  (4) over (PARTITION By F.rental_duration ) AS Standerd_Quartile
+FROM Film F
+JOIN Film_Category FC
+ON F.film_id = FC.film_id
+JOIN Category C
+ON FC.category_id = C.category_id
+WHERE C.name IN ('Animation', 'Children', 'Family', 'Comedy', 'Classics', 'Music')) t1
+GROUP BY 1,2
+ORDER BY 1,2;
+
+//
+
+
+
+
+Q4// Write a query that returns the store ID for the store,
+the year and month and the number of rental orders each store has fulfilled for
+that month.
+
+
+SELECT  DATE_PART ('month' , R.rental_date) AS Rental_Month ,
+        DATE_PART ('year' , R.rental_date) AS Rental_Year,
+        S.store_id AS Store_ID ,
+         COUNT (*) AS Count_rental
+FROM store S
+JOIN staff ST
+on  S.store_id = ST.store_id
+JOIN rental R
+ON ST.staff_id = R.staff_id
+GROUP BY 1,2,3
+ORDER BY 2,1
+
+
+//
