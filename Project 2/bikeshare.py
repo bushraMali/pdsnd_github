@@ -58,6 +58,11 @@ def load_data(city, month, day):
     Returns:
         df - Pandas DataFrame containing city data filtered by month and day
     """
+
+    
+    print("\nThe program is loading the data for the filters of your choice.")
+    start_time = time.time()
+
     # load data file into a dataframe
     df = pd.read_csv(CITY_DATA[city])
 
@@ -83,7 +88,8 @@ def load_data(city, month, day):
     if day != 'all':
         # filter by day of week to create the new dataframe
         df = df[df['day_of_week'] == day.title()]
-
+	
+	
     return df
 
 def time_stats(df):
